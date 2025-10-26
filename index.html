@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Education Survey 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #5D1F3C 0%, #8B3A5A 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #5D1F3C 0%, #8B3A5A 100%);
+            color: white;
+            padding: 40px 30px;
+            position: relative;
+        }
+        
+        .header-content {
+            text-align: center;
+            padding-right: 110px;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            width: 100px;
+            height: 80px;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #5D1F3C 0%, #8B3A5A 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #5D1F3C;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #5D1F3C;
+        }
+        
+        .section-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .question {
+            margin-bottom: 35px;
+        }
+        
+        .question-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .question-sublabel {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .radio-option:hover, .checkbox-option:hover {
+            border-color: #5D1F3C;
+            background: #FDF5F8;
+        }
+        
+        .radio-option input, .checkbox-option input {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+        
+        .text-input, .textarea-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .text-input:focus, .textarea-input:focus {
+            outline: none;
+            border-color: #5D1F3C;
+        }
+        
+        .textarea-input {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .rating-table {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+        
+        .rating-table table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+        
+        .rating-table th, .rating-table td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .rating-table th {
+            background: #FDF5F8;
+            font-weight: 600;
+            color: #5D1F3C;
+        }
+        
+        .rating-table input[type="radio"] {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        .rating-table td:first-child {
+            font-size: 14px;
+            max-width: 250px;
+        }
+        
+        .rating-table td:not(:first-child) {
+            text-align: center;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #5D1F3C 0%, #8B3A5A 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(93, 31, 60, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .required {
+            color: #D32F2F;
+            margin-left: 5px;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 60px 30px;
+        }
+        
+        .success-message.active {
+            display: block;
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            color: #5D1F3C;
+            margin-bottom: 20px;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .info-box {
+            background: #FDF5F8;
+            border-left: 4px solid #5D1F3C;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header-content {
+                padding-right: 0;
+                text-align: center;
+            }
+            
+            .logo {
+                position: static;
+                margin: 0 auto 20px;
+                width: 80px;
+                height: 65px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .rating-table {
+                font-size: 12px;
+            }
+            
+            .rating-table th, .rating-table td {
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                    <div style="font-size: 18px; font-weight: 900; color: #5D1F3C; letter-spacing: 1px; font-family: 'Arial Black', sans-serif; line-height: 1;">ORANE</div>
+                    <div style="font-size: 8px; font-weight: 600; color: #5D1F3C; letter-spacing: 2px; margin-top: 2px; line-height: 1;">INTERNATIONAL</div>
+                </div>
+            </div>
+            <div class="header-content">
+                <h1>🎓 Beauty Education Business Reality Check</h1>
+                <p>व्यापार की असली तस्वीर - Stakeholder Feedback & Market Intelligence</p>
+                <p style="margin-top: 10px; font-size: 12px;">Time Required: 20-25 minutes | All responses confidential</p>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <div class="content">
+            <form id="surveyForm">
+                
+                <!-- REQUIRED INFORMATION -->
+                <div class="section active" data-section="1">
+                    <h2 class="section-title">Required Information<br><span style="font-size: 18px; font-weight: normal;">ज़रूरी जानकारी</span></h2>
+                    
+                    <div class="info-box">
+                        <strong>📋 Required:</strong> Please provide your name and phone number before proceeding.<br>
+                        <strong>ज़रूरी:</strong> कृपया आगे बढ़ने से पहले अपना नाम और फ़ोन नंबर दें।
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Your Name <span class="required">*</span></label>
+                        <label class="question-sublabel">(आपका नाम)</label>
+                        <input type="text" name="respondent_name_main" class="text-input" placeholder="Enter your full name / अपना पूरा नाम लिखें" required>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Phone Number <span class="required">*</span></label>
+                        <label class="question-sublabel">(फ़ोन नंबर)</label>
+                        <input type="tel" name="respondent_phone" class="text-input" placeholder="10-digit mobile / 10 digit mobile number" pattern="[0-9]{10}" required>
+                        <small style="color: #666; font-size: 12px;">Format: 9876543210</small>
+                    </div>
+                </div>
+
+                <!-- SECTION 1: Market Reality Check -->
+                <div class="section" data-section="2">
+                    <h2 class="section-title">Section 1: Market Reality Check<br><span style="font-size: 18px; font-weight: normal;">खंड 1: मार्केट की असली हालत</span></h2>
+                    
+                    <div class="question">
+                        <label class="question-label">Q1. How would you characterize the current state of the beauty education market in your region? <span class="required">*</span></label>
+                        <label class="question-sublabel">आपके एरिया में beauty education market की हालत कैसी है?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q1_market_state" value="strong_growth" required>
+                                Strong growth - better than last year (अच्छी growth - पिछले साल से बेहतर)
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q1_market_state" value="slow_steady">
+                                Slow but steady - comparable to last year (धीरे चल रहा - पिछले साल जैसा)
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q1_market_state" value="temp_slowdown">
+                                Temporary slowdown - will recover soon (थोड़ी slowdown - जल्दी ठीक हो जाएगा)
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q1_market_state" value="structural_decline">
+                                Structural decline - permanent market shift (permanent गिरावट - market बदल गया है)
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q1_market_state" value="dont_know">
+                                Don't know / Can't say (पता नहीं)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q1b. If slowdown or decline, what is the PRIMARY driver?</label>
+                        <label class="question-sublabel">अगर slowdown या decline है, तो सबसे बड़ा reason क्या है?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q1b_driver" value="canada_visa">
+                                Canada visa restrictions / reduced foreign opportunities
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q1b_driver" value="economic">
+                                Economic conditions / customers have less money
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q1b_driver" value="competition">
+                                Increased competition from local/smaller academies
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q1b_driver" value="other_fields">
+                                Students preferring other career fields entirely
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q1b_driver" value="quality_concerns">
+                                Quality concerns about beauty industry jobs/salaries
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q1b_driver" value="other">
+                                Other: <input type="text" name="q1b_other" class="text-input" style="margin-left: 10px; width: 300px;">
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q2. Comparing last 3 months to same period last year: <span class="required">*</span></label>
+                        <label class="question-sublabel">पिछले साल के मुकाबले last 3 months में:</label>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label class="question-sublabel"><strong>Walk-ins:</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_walkins" value="sig_higher" required>
+                                    Significantly higher (+20%+)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_walkins" value="mod_higher">
+                                    Moderately higher (+10-20%)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_walkins" value="same">
+                                    About the same (±10%)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_walkins" value="mod_lower">
+                                    Moderately lower (-10-20%)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_walkins" value="sig_lower">
+                                    Significantly lower (-20%+)
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="question-sublabel"><strong>Digital inquiries:</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_digital" value="sig_higher" required>
+                                    Significantly higher (+20%+)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_digital" value="mod_higher">
+                                    Moderately higher (+10-20%)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_digital" value="same">
+                                    About the same (±10%)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_digital" value="mod_lower">
+                                    Moderately lower (-10-20%)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q2_digital" value="sig_lower">
+                                    Significantly lower (-20%+)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q3. CRITICAL: What is your PRIMARY challenge? <span class="required">*</span></label>
+                        <label class="question-sublabel">सबसे बड़ी दिक्कत क्या है?</label>
+                        <div class="info-box">
+                            <strong>Why this matters:</strong> "Not enough inquiries" = Market/awareness issue. "Poor conversion" = Execution/value issue.
+                        </div>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q3_challenge" value="not_enough_inquiries" required>
+                                Not enough inquiries/walk-ins (people aren't coming)
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q3_challenge" value="poor_conversion">
+                                Enough inquiries but poor conversion
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q3_challenge" value="both">
+                                Both equally challenging
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q3_challenge" value="neither">
+                                Neither - we are meeting targets
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q4. Do you agree: "Students NOT ENROLLING is different from NO WALK-INS"? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q4_agree" value="strongly_agree" required>
+                                Strongly agree (बिल्कुल सही)
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q4_agree" value="agree">
+                                Agree
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q4_agree" value="neutral">
+                                Neutral
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q4_agree" value="disagree">
+                                Disagree
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q4_agree" value="strongly_disagree">
+                                Strongly disagree
+                            </label>
+                        </div>
+                        <label class="question-sublabel" style="margin-top: 15px;">If you agree, explain the difference:</label>
+                        <textarea name="q4_explain" class="textarea-input" placeholder="Explain here"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q5. How are OTHER businesses in your local market performing? <span class="required">*</span></label>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label class="question-sublabel"><strong>Salons/Spas:</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_salons" value="thriving" required>
+                                    Thriving - very busy
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_salons" value="okay">
+                                    Doing okay - steady
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_salons" value="struggling">
+                                    Struggling - fewer customers
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_salons" value="dont_know">
+                                    Don't know
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label class="question-sublabel"><strong>Retail (cosmetics/beauty):</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_retail" value="thriving" required>
+                                    Thriving
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_retail" value="okay">
+                                    Doing okay
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_retail" value="struggling">
+                                    Struggling
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_retail" value="dont_know">
+                                    Don't know
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="question-sublabel"><strong>Other education institutes:</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_education" value="thriving" required>
+                                    Thriving
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_education" value="okay">
+                                    Doing okay
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_education" value="struggling">
+                                    Struggling
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q5_education" value="dont_know">
+                                    Don't know
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: Competition Analysis -->
+                <div class="section" data-section="3">
+                    <h2 class="section-title">Section 2: Competition Analysis<br><span style="font-size: 18px; font-weight: normal;">खंड 2: Competition</span></h2>
+                    
+                    <div class="question">
+                        <label class="question-label">Q6. Have you seen an INCREASE in competition in last 12 months? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q6_competition_increase" value="sig_increase" required>
+                                Yes, significant increase
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q6_competition_increase" value="mod_increase">
+                                Yes, moderate increase
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q6_competition_increase" value="no_change">
+                                No change
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q6_competition_increase" value="decreased">
+                                Actually decreased
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">If yes, what type of competitors increased most? (Check all that apply)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q6_comp_types" value="small_local">
+                                Small local academies (₹30-50k)
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q6_comp_types" value="independent_artists">
+                                Independent makeup artists / short workshops
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q6_comp_types" value="branded">
+                                Branded competitors (Lakmé, VLCC, Meribindiya)
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q6_comp_types" value="online">
+                                Online courses/YouTube
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q6_comp_types" value="product_companies">
+                                Beauty product companies' training programs
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q7. What is competition doing BETTER than us? (Check top 3) <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="lower_pricing">
+                                Lower pricing / better value
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="digital_marketing">
+                                More aggressive digital marketing
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="faster_completion">
+                                Faster completion / more practical
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="trainer_quality">
+                                Better trainers / celebrity instructors
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="transparent_pricing">
+                                Transparent pricing (no hidden charges)
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="flexible_schedules">
+                                Flexible schedules / online options
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="job_placement">
+                                Job placement guarantees
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="modern_content">
+                                More modern course content
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="facilities">
+                                Better facilities / experience
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q7_comp_better" value="local_presence">
+                                Stronger local brand presence
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q8. Name 2-3 competitors you're LOSING students to:</label>
+                        <input type="text" name="q8_competitor1" class="text-input" placeholder="Competitor 1" style="margin-bottom: 10px;">
+                        <input type="text" name="q8_competitor1_advantage" class="text-input" placeholder="Their key advantage" style="margin-bottom: 15px;">
+                        
+                        <input type="text" name="q8_competitor2" class="text-input" placeholder="Competitor 2" style="margin-bottom: 10px;">
+                        <input type="text" name="q8_competitor2_advantage" class="text-input" placeholder="Their key advantage" style="margin-bottom: 15px;">
+                        
+                        <input type="text" name="q8_competitor3" class="text-input" placeholder="Competitor 3" style="margin-bottom: 10px;">
+                        <input type="text" name="q8_competitor3_advantage" class="text-input" placeholder="Their key advantage">
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q9. Rate competitive factors in YOUR market (1-5): <span class="required">*</span></label>
+                        <div class="rating-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Factor</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Course pricing (lowest)</td>
+                                        <td><input type="radio" name="q9_pricing" value="1" required></td>
+                                        <td><input type="radio" name="q9_pricing" value="2"></td>
+                                        <td><input type="radio" name="q9_pricing" value="3"></td>
+                                        <td><input type="radio" name="q9_pricing" value="4"></td>
+                                        <td><input type="radio" name="q9_pricing" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Brand reputation</td>
+                                        <td><input type="radio" name="q9_brand" value="1" required></td>
+                                        <td><input type="radio" name="q9_brand" value="2"></td>
+                                        <td><input type="radio" name="q9_brand" value="3"></td>
+                                        <td><input type="radio" name="q9_brand" value="4"></td>
+                                        <td><input type="radio" name="q9_brand" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Digital presence</td>
+                                        <td><input type="radio" name="q9_digital" value="1" required></td>
+                                        <td><input type="radio" name="q9_digital" value="2"></td>
+                                        <td><input type="radio" name="q9_digital" value="3"></td>
+                                        <td><input type="radio" name="q9_digital" value="4"></td>
+                                        <td><input type="radio" name="q9_digital" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trainer quality</td>
+                                        <td><input type="radio" name="q9_trainers" value="1" required></td>
+                                        <td><input type="radio" name="q9_trainers" value="2"></td>
+                                        <td><input type="radio" name="q9_trainers" value="3"></td>
+                                        <td><input type="radio" name="q9_trainers" value="4"></td>
+                                        <td><input type="radio" name="q9_trainers" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Job placement support</td>
+                                        <td><input type="radio" name="q9_job" value="1" required></td>
+                                        <td><input type="radio" name="q9_job" value="2"></td>
+                                        <td><input type="radio" name="q9_job" value="3"></td>
+                                        <td><input type="radio" name="q9_job" value="4"></td>
+                                        <td><input type="radio" name="q9_job" value="5"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: Pricing & Value -->
+                <div class="section" data-section="4">
+                    <h2 class="section-title">Section 3: Pricing & Value<br><span style="font-size: 18px; font-weight: normal;">खंड 3: Price और Value</span></h2>
+                    
+                    <div class="question">
+                        <label class="question-label">Q10. TYPICAL competitor pricing in your area? <span class="required">*</span></label>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label class="question-sublabel"><strong>Beginner/Level 1 courses:</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_beginner_price" value="20-30k" required>
+                                    ₹20-30k
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_beginner_price" value="30-40k">
+                                    ₹30-40k
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_beginner_price" value="40-60k">
+                                    ₹40-60k
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_beginner_price" value="60-80k">
+                                    ₹60-80k
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_beginner_price" value="80k+">
+                                    ₹80k+
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="question-sublabel"><strong>Advanced/Complete diplomas:</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_advanced_price" value="40-60k" required>
+                                    ₹40-60k
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_advanced_price" value="60-80k">
+                                    ₹60-80k
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_advanced_price" value="80k-1L">
+                                    ₹80k-1 lakh
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_advanced_price" value="1-1.5L">
+                                    ₹1-1.5 lakh
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q10_advanced_price" value="1.5L+">
+                                    ₹1.5 lakh+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q11. Is price sensitivity HIGH in your market? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q11_price_sensitivity" value="extremely_high" required>
+                                Extremely high - comparing every ₹1000
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q11_price_sensitivity" value="high">
+                                High - price is major factor
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q11_price_sensitivity" value="moderate">
+                                Moderate - price matters but not only factor
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q11_price_sensitivity" value="low">
+                                Low - willing to pay for quality
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q12. PRIMARY reason for price sensitivity? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q12_price_reason" value="cheaper_competition" required>
+                                Cheaper local competition
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q12_price_reason" value="no_value_diff">
+                                Don't see value difference between ₹30k and ₹1L
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q12_price_reason" value="economic">
+                                Economic conditions - less money
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q12_price_reason" value="no_canada">
+                                No foreign opportunity = lower willingness to pay
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q12_price_reason" value="hidden_charges">
+                                Hidden charges create distrust
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q12_price_reason" value="test_first">
+                                Want to test with short course first
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q13. When students question pricing, MOST COMMON objection? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q13_objection" value="xyz_cheaper" required>
+                                "XYZ offers same for ₹40k"
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q13_objection" value="extra_charges">
+                                "Why extra charges for kit/exam?"
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q13_objection" value="youtube">
+                                "Can learn from YouTube for free"
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q13_objection" value="no_job_guarantee">
+                                "No job guarantee, why pay so much?"
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q13_objection" value="no_abroad">
+                                "Certificate won't help abroad anymore"
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q13_objection" value="try_short">
+                                "Want to try short course first"
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q14. What pricing strategy should we adopt? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q14_pricing_strategy" value="keep_premium" required>
+                                Keep premium pricing, improve value perception
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q14_pricing_strategy" value="reduce_pricing">
+                                Reduce pricing to match market (₹40-60k)
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q14_pricing_strategy" value="new_competitive">
+                                Launch NEW competitive courses at ₹40k, keep flagship premium
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q14_pricing_strategy" value="trial_courses">
+                                Offer short trial courses, then upsell
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q14_pricing_strategy" value="flexible_payment">
+                                Flexible pricing based on payment terms
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q14_pricing_strategy" value="job_guarantee">
+                                Focus on outcomes (job guarantee), charge premium
+                            </label>
+                        </div>
+                        <label class="question-sublabel" style="margin-top: 15px;">Explain your reasoning:</label>
+                        <textarea name="q14_reasoning" class="textarea-input" placeholder="Your reasoning here"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q15. Students today are MORE interested in: (Rank 1-5, where 1=most) <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option" style="display: block; margin-bottom: 10px;">
+                                Certificate/credential for resume:
+                                <select name="q15_certificate" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label class="radio-option" style="display: block; margin-bottom: 10px;">
+                                Practical skills they can immediately use:
+                                <select name="q15_practical" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label class="radio-option" style="display: block; margin-bottom: 10px;">
+                                Pathway to jobs/income:
+                                <select name="q15_jobs" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label class="radio-option" style="display: block; margin-bottom: 10px;">
+                                Recognition/prestige of institute:
+                                <select name="q15_prestige" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label class="radio-option" style="display: block;">
+                                Affordable/fast course completion:
+                                <select name="q15_affordable" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: Lead Generation & Conversion -->
+                <div class="section" data-section="5">
+                    <h2 class="section-title">Section 4: Lead Generation & Conversion<br><span style="font-size: 18px; font-weight: normal;">खंड 4: Leads और Conversion</span></h2>
+                    
+                    <div class="question">
+                        <label class="question-label">Q16. For digital marketing, what's the bigger challenge? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q16_digital_challenge" value="volume" required>
+                                Generating enough leads (volume problem)
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q16_digital_challenge" value="conversion">
+                                Converting leads into enrollments
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q16_digital_challenge" value="both">
+                                Both equally challenging
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q16_digital_challenge" value="neither">
+                                Neither - digital is working fine
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q17. AVERAGE conversion rate at your center: <span class="required">*</span></label>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label class="question-sublabel"><strong>Walk-ins to enrollment:</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_walkin_conversion" value="60+" required>
+                                    60%+
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_walkin_conversion" value="40-60">
+                                    40-60%
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_walkin_conversion" value="20-40">
+                                    20-40%
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_walkin_conversion" value="10-20">
+                                    10-20%
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_walkin_conversion" value="below10">
+                                    Below 10%
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="question-sublabel"><strong>Digital inquiries:</strong></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_digital_conversion" value="40+" required>
+                                    40%+
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_digital_conversion" value="20-40">
+                                    20-40%
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_digital_conversion" value="10-20">
+                                    10-20%
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_digital_conversion" value="5-10">
+                                    5-10%
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="q17_digital_conversion" value="below5">
+                                    Below 5%
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q18. When student DOESN'T enroll after inquiry, SINGLE MOST IMPORTANT reason? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="price_high" required>
+                                Price too high / found cheaper option
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="think_about">
+                                Wants to "think about it" / compare
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="value_not_convinced">
+                                Not convinced of value / job outcomes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="family_financial">
+                                Family didn't approve / financial constraint
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="timing">
+                                Timing / batch schedule doesn't work
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="trainer_concern">
+                                Trainer/faculty concern
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="facilities">
+                                Facilities/infrastructure not impressive
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="hidden_charges">
+                                Hidden charges/fee confusion
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="competitor_better">
+                                Competitor offered better deal
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q18_not_enroll" value="lost_interest">
+                                Lost interest in beauty field entirely
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q19. Rate lead quality from different sources (1-5): <span class="required">*</span></label>
+                        <div class="rating-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Source</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Walk-ins</td>
+                                        <td><input type="radio" name="q19_walkins" value="1" required></td>
+                                        <td><input type="radio" name="q19_walkins" value="2"></td>
+                                        <td><input type="radio" name="q19_walkins" value="3"></td>
+                                        <td><input type="radio" name="q19_walkins" value="4"></td>
+                                        <td><input type="radio" name="q19_walkins" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Facebook/Instagram ads</td>
+                                        <td><input type="radio" name="q19_social_ads" value="1" required></td>
+                                        <td><input type="radio" name="q19_social_ads" value="2"></td>
+                                        <td><input type="radio" name="q19_social_ads" value="3"></td>
+                                        <td><input type="radio" name="q19_social_ads" value="4"></td>
+                                        <td><input type="radio" name="q19_social_ads" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Google Ads</td>
+                                        <td><input type="radio" name="q19_google" value="1" required></td>
+                                        <td><input type="radio" name="q19_google" value="2"></td>
+                                        <td><input type="radio" name="q19_google" value="3"></td>
+                                        <td><input type="radio" name="q19_google" value="4"></td>
+                                        <td><input type="radio" name="q19_google" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Referrals from alumni</td>
+                                        <td><input type="radio" name="q19_referrals" value="1" required></td>
+                                        <td><input type="radio" name="q19_referrals" value="2"></td>
+                                        <td><input type="radio" name="q19_referrals" value="3"></td>
+                                        <td><input type="radio" name="q19_referrals" value="4"></td>
+                                        <td><input type="radio" name="q19_referrals" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Local events</td>
+                                        <td><input type="radio" name="q19_events" value="1" required></td>
+                                        <td><input type="radio" name="q19_events" value="2"></td>
+                                        <td><input type="radio" name="q19_events" value="3"></td>
+                                        <td><input type="radio" name="q19_events" value="4"></td>
+                                        <td><input type="radio" name="q19_events" value="5"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q20. Satisfied with counseling/sales training and tools? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q20_counseling_satisfaction" value="very_satisfied" required>
+                                Very satisfied - team well-equipped
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q20_counseling_satisfaction" value="satisfied">
+                                Satisfied - mostly adequate
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q20_counseling_satisfaction" value="neutral">
+                                Neutral
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q20_counseling_satisfaction" value="unsatisfied">
+                                Unsatisfied - significant gaps
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q20_counseling_satisfaction" value="very_unsatisfied">
+                                Very unsatisfied - major overhaul needed
+                            </label>
+                        </div>
+                        
+                        <label class="question-sublabel" style="margin-top: 20px;">What counseling/sales support would help most? (Check top 3)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q20_support_needed" value="comparison_sheets">
+                                Competitive comparison sheets
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q20_support_needed" value="objection_scripts">
+                                Scripts for common objections
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q20_support_needed" value="updated_usps">
+                                Updated USPs and how to communicate
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q20_support_needed" value="demo_experience">
+                                Better demo/trial class experience
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q20_support_needed" value="followup_automation">
+                                Follow-up automation tools
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q20_support_needed" value="success_stories">
+                                Success stories/placement proof
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="q20_support_needed" value="pricing_flexibility">
+                                Pricing flexibility/discount authority
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: Internal Execution -->
+                <div class="section" data-section="6">
+                    <h2 class="section-title">Section 5: Internal Execution<br><span style="font-size: 18px; font-weight: normal;">खंड 5: Internal Execution</span></h2>
+                    
+                    <div class="question">
+                        <label class="question-label">Q21. Are counselors THOROUGHLY FAMILIAR with current USPs? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q21_usps_familiar" value="completely" required>
+                                Yes, completely up-to-date and confident
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q21_usps_familiar" value="mostly">
+                                Mostly yes, but some confusion exists
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q21_usps_familiar" value="somewhat">
+                                Somewhat - know basics but not details
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q21_usps_familiar" value="no">
+                                No - unclear or outdated
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q21_usps_familiar" value="no_clear_usps">
+                                We don't have clear USPs communicated
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q22. Do corrective actions translate into CLEAR ACTION ITEMS? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q22_actions_clear" value="always" required>
+                                Always - we get clear implementation guidance
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q22_actions_clear" value="usually">
+                                Usually - mostly clear with minor gaps
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q22_actions_clear" value="sometimes">
+                                Sometimes - we figure out implementation ourselves
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q22_actions_clear" value="rarely">
+                                Rarely - strategies announced but no execution plan
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q22_actions_clear" value="never">
+                                Never - just PowerPoints, no ground action
+                            </label>
+                        </div>
+                        <label class="question-sublabel" style="margin-top: 15px;">Example of recent initiative that didn't translate well:</label>
+                        <textarea name="q22_example" class="textarea-input" placeholder="Example here"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q23. Rate your team's capability (1-5): <span class="required">*</span></label>
+                        <div class="rating-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Capability</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Digital marketing execution</td>
+                                        <td><input type="radio" name="q23_digital" value="1" required></td>
+                                        <td><input type="radio" name="q23_digital" value="2"></td>
+                                        <td><input type="radio" name="q23_digital" value="3"></td>
+                                        <td><input type="radio" name="q23_digital" value="4"></td>
+                                        <td><input type="radio" name="q23_digital" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Counseling/objection handling</td>
+                                        <td><input type="radio" name="q23_counseling" value="1" required></td>
+                                        <td><input type="radio" name="q23_counseling" value="2"></td>
+                                        <td><input type="radio" name="q23_counseling" value="3"></td>
+                                        <td><input type="radio" name="q23_counseling" value="4"></td>
+                                        <td><input type="radio" name="q23_counseling" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Follow-up discipline</td>
+                                        <td><input type="radio" name="q23_followup" value="1" required></td>
+                                        <td><input type="radio" name="q23_followup" value="2"></td>
+                                        <td><input type="radio" name="q23_followup" value="3"></td>
+                                        <td><input type="radio" name="q23_followup" value="4"></td>
+                                        <td><input type="radio" name="q23_followup" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trainer quality/teaching</td>
+                                        <td><input type="radio" name="q23_trainers" value="1" required></td>
+                                        <td><input type="radio" name="q23_trainers" value="2"></td>
+                                        <td><input type="radio" name="q23_trainers" value="3"></td>
+                                        <td><input type="radio" name="q23_trainers" value="4"></td>
+                                        <td><input type="radio" name="q23_trainers" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Student experience</td>
+                                        <td><input type="radio" name="q23_experience" value="1" required></td>
+                                        <td><input type="radio" name="q23_experience" value="2"></td>
+                                        <td><input type="radio" name="q23_experience" value="3"></td>
+                                        <td><input type="radio" name="q23_experience" value="4"></td>
+                                        <td><input type="radio" name="q23_experience" value="5"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q24. SINGLE BIGGEST internal bottleneck preventing better performance? <span class="required">*</span></label>
+                        <textarea name="q24_bottleneck" class="textarea-input" placeholder="Be specific..." required></textarea>
+                    </div>
+                </div>
+
+                <!-- SECTION 6: Strategic Direction -->
+                <div class="section" data-section="7">
+                    <h2 class="section-title">Section 6: Strategic Direction<br><span style="font-size: 18px; font-weight: normal;">खंड 6: Strategic Direction</span></h2>
+                    
+                    <div class="question">
+                        <label class="question-label">Q25. Should we move toward LOW-PRICE or PREMIUM positioning? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="q25_pricing_model" value="definitely_low" required>
+                                Definitely low-price - market demands it
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q25_pricing_model" value="lean_low">
+                                Lean toward low-price but with quality
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q25_pricing_model" value="middle">
+                                Middle ground - competitive pricing with premium elements
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q25_pricing_model" value="lean_premium">
+                                Lean toward premium with clear outcome differentiation
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q25_pricing_model" value="definitely_premium">
+                                Definitely premium - compete on quality, not price
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="q25_pricing_model" value="both">
+                                BOTH - different products for different segments
+                            </label>
+                        </div>
+                        <label class="question-sublabel" style="margin-top: 15px;">Explain your reasoning:</label>
+                        <textarea name="q25_reasoning" class="textarea-input" placeholder="Your reasoning here"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q26. Rate importance for FUTURE SUCCESS (1-5): <span class="required">*</span></label>
+                        <div class="rating-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Factor</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Grand convocation events</td>
+                                        <td><input type="radio" name="q26_convocation" value="1" required></td>
+                                        <td><input type="radio" name="q26_convocation" value="2"></td>
+                                        <td><input type="radio" name="q26_convocation" value="3"></td>
+                                        <td><input type="radio" name="q26_convocation" value="4"></td>
+                                        <td><input type="radio" name="q26_convocation" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>New destination countries</td>
+                                        <td><input type="radio" name="q26_destinations" value="1" required></td>
+                                        <td><input type="radio" name="q26_destinations" value="2"></td>
+                                        <td><input type="radio" name="q26_destinations" value="3"></td>
+                                        <td><input type="radio" name="q26_destinations" value="4"></td>
+                                        <td><input type="radio" name="q26_destinations" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Job placement guarantees</td>
+                                        <td><input type="radio" name="q26_job" value="1" required></td>
+                                        <td><input type="radio" name="q26_job" value="2"></td>
+                                        <td><input type="radio" name="q26_job" value="3"></td>
+                                        <td><input type="radio" name="q26_job" value="4"></td>
+                                        <td><input type="radio" name="q26_job" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Short affordable trial courses</td>
+                                        <td><input type="radio" name="q26_trial" value="1" required></td>
+                                        <td><input type="radio" name="q26_trial" value="2"></td>
+                                        <td><input type="radio" name="q26_trial" value="3"></td>
+                                        <td><input type="radio" name="q26_trial" value="4"></td>
+                                        <td><input type="radio" name="q26_trial" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Transparent pricing (no hidden charges)</td>
+                                        <td><input type="radio" name="q26_transparent" value="1" required></td>
+                                        <td><input type="radio" name="q26_transparent" value="2"></td>
+                                        <td><input type="radio" name="q26_transparent" value="3"></td>
+                                        <td><input type="radio" name="q26_transparent" value="4"></td>
+                                        <td><input type="radio" name="q26_transparent" value="5"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q27. What 2-3 transformative changes would make biggest difference at YOUR center? <span class="required">*</span></label>
+                        <input type="text" name="q27_innovation1" class="text-input" placeholder="Innovation #1" style="margin-bottom: 10px;" required>
+                        <input type="text" name="q27_innovation2" class="text-input" placeholder="Innovation #2" style="margin-bottom: 10px;" required>
+                        <input type="text" name="q27_innovation3" class="text-input" placeholder="Innovation #3">
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q28. If you could ONLY implement THREE changes in next 90 days? <span class="required">*</span></label>
+                        <input type="text" name="q28_priority1" class="text-input" placeholder="Priority #1" style="margin-bottom: 10px;" required>
+                        <input type="text" name="q28_priority2" class="text-input" placeholder="Priority #2" style="margin-bottom: 10px;" required>
+                        <input type="text" name="q28_priority3" class="text-input" placeholder="Priority #3" required>
+                    </div>
+                </div>
+
+                <!-- SECTION 7: Validation -->
+                <div class="section" data-section="8">
+                    <h2 class="section-title">Section 7: Validation of Key Themes<br><span style="font-size: 18px; font-weight: normal;">खंड 7: Themes की Validation</span></h2>
+                    
+                    <div class="question">
+                        <label class="question-label">Q29. Rate your agreement with these statements (1-5): <span class="required">*</span></label>
+                        <div class="rating-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Statement</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Canada visa closure is biggest impact factor</td>
+                                        <td><input type="radio" name="q29_canada" value="1" required></td>
+                                        <td><input type="radio" name="q29_canada" value="2"></td>
+                                        <td><input type="radio" name="q29_canada" value="3"></td>
+                                        <td><input type="radio" name="q29_canada" value="4"></td>
+                                        <td><input type="radio" name="q29_canada" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>₹30-40k local competitors are main threat</td>
+                                        <td><input type="radio" name="q29_local_threat" value="1" required></td>
+                                        <td><input type="radio" name="q29_local_threat" value="2"></td>
+                                        <td><input type="radio" name="q29_local_threat" value="3"></td>
+                                        <td><input type="radio" name="q29_local_threat" value="4"></td>
+                                        <td><input type="radio" name="q29_local_threat" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hidden charges create trust issues</td>
+                                        <td><input type="radio" name="q29_hidden_charges" value="1" required></td>
+                                        <td><input type="radio" name="q29_hidden_charges" value="2"></td>
+                                        <td><input type="radio" name="q29_hidden_charges" value="3"></td>
+                                        <td><input type="radio" name="q29_hidden_charges" value="4"></td>
+                                        <td><input type="radio" name="q29_hidden_charges" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Our digital marketing is weaker than competitors</td>
+                                        <td><input type="radio" name="q29_digital_weak" value="1" required></td>
+                                        <td><input type="radio" name="q29_digital_weak" value="2"></td>
+                                        <td><input type="radio" name="q29_digital_weak" value="3"></td>
+                                        <td><input type="radio" name="q29_digital_weak" value="4"></td>
+                                        <td><input type="radio" name="q29_digital_weak" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Students want practical skills, not just certificates</td>
+                                        <td><input type="radio" name="q29_practical" value="1" required></td>
+                                        <td><input type="radio" name="q29_practical" value="2"></td>
+                                        <td><input type="radio" name="q29_practical" value="3"></td>
+                                        <td><input type="radio" name="q29_practical" value="4"></td>
+                                        <td><input type="radio" name="q29_practical" value="5"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Q30. Which challenge is MOST CRITICAL to solve first? (Rank 1-5) <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-option" style="display: block; margin-bottom: 10px;">
+                                Pricing strategy / competitive positioning:
+                                <select name="q30_pricing" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label class="radio-option" style="display: block; margin-bottom: 10px;">
+                                Lead generation (inquiry volume):
+                                <select name="q30_leads" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label class="radio-option" style="display: block; margin-bottom: 10px;">
+                                Conversion improvement:
+                                <select name="q30_conversion" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label class="radio-option" style="display: block; margin-bottom: 10px;">
+                                Course innovation:
+                                <select name="q30_courses" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                            <label class="radio-option" style="display: block;">
+                                Digital marketing / brand visibility:
+                                <select name="q30_digital" class="text-input" style="width: 80px; margin-left: 10px;" required>
+                                    <option value="">-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 8: Final Feedback -->
+                <div class="section" data-section="9">
+                    <h2 class="section-title">Section 8: Final Open Feedback<br><span style="font-size: 18px; font-weight: normal;">खंड 8: आखिरी Feedback</span></h2>
+                    
+                    <div class="question">
+                        <label class="question-label">Q31. Any other comments, suggestions, or insights?</label>
+                        <label class="question-sublabel">कोई और comments, suggestions या insights?</label>
+                        <textarea name="q31_other" class="textarea-input" placeholder="Your insights here / यहाँ लिखें"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Additional Information (Optional):</label>
+                        <label class="question-sublabel">Note: Name and phone already captured | नाम और फ़ोन पहले ही ले लिया</label>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <label class="question-sublabel">Role:</label>
+                            <select name="respondent_role" class="text-input">
+                                <option value="">Select role</option>
+                                <option value="center_head">Center Head</option>
+                                <option value="franchise_partner">Franchise Partner</option>
+                                <option value="business_head">Business Head / Zonal Manager</option>
+                                <option value="counselor">Counselor / Sales Team</option>
+                                <option value="operations">Operations / Admin</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <input type="text" name="respondent_location" class="text-input" placeholder="Location/Territory" style="margin-bottom: 10px;">
+                        <input type="text" name="respondent_years" class="text-input" placeholder="Years with organization" style="margin-bottom: 10px;">
+                        
+                        <div>
+                            <label class="question-sublabel">Center size (currently enrolled students):</label>
+                            <select name="center_size" class="text-input">
+                                <option value="">Select size</option>
+                                <option value="less_50">Less than 50</option>
+                                <option value="50-100">50-100</option>
+                                <option value="100-200">100-200</option>
+                                <option value="200+">200+</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box" style="background: #FDF5F8;">
+                        <strong>🙏 Thank you | धन्यवाद</strong><br>
+                        Your honest feedback is critical for making informed decisions. आपकी honest feedback के लिए धन्यवाद।<br><br>
+                        <em>"The goal is not to defend what was, but to discover what must be."</em><br>
+                        <em>"मकसद यह defend करना नहीं कि क्या था, बल्कि यह discover करना कि क्या होना चाहिए।"</em>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="navigation">
+                    <button type="button" class="btn btn-secondary" id="prevBtn" onclick="navigate(-1)" style="display: none;">← Previous</button>
+                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="navigate(1)">Next →</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">Submit Survey</button>
+                </div>
+                
+                <div class="error-message" id="errorMessage">Please answer all required questions before proceeding.</div>
+            </form>
+            
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">✓</div>
+                <h2>Thank You! धन्यवाद!</h2>
+                <p style="margin-top: 20px; color: #666;">Your response has been recorded successfully.</p>
+                <p style="margin-top: 10px; color: #666; font-size: 14px;">Your honest feedback is invaluable for shaping our strategy.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentSection = 1;
+        const totalSections = 9;
+        
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSNZzEhd_v16_n_r_xaHz4pIXRM4Ym0EgfTiMwL7BVUTMyrn1HntdUtStITn1OAJxZlA/exec';
+        
+        function navigate(direction) {
+            const currentSectionElement = document.querySelector(`.section[data-section="${currentSection}"]`);
+            
+            if (direction === 1) {
+                const requiredInputs = currentSectionElement.querySelectorAll('[required]');
+                let allFilled = true;
+                
+                requiredInputs.forEach(input => {
+                    if (input.type === 'radio') {
+                        const radioGroup = currentSectionElement.querySelectorAll(`[name="${input.name}"]`);
+                        const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+                        if (!isChecked) allFilled = false;
+                    } else if (input.type === 'checkbox') {
+                        const checkboxGroup = currentSectionElement.querySelectorAll(`[name="${input.name}"]`);
+                        const isChecked = Array.from(checkboxGroup).some(cb => cb.checked);
+                        if (!isChecked) allFilled = false;
+                    } else if (input.tagName === 'SELECT') {
+                        if (!input.value) allFilled = false;
+                    } else if (!input.value.trim()) {
+                        allFilled = false;
+                    }
+                });
+                
+                if (!allFilled) {
+                    document.getElementById('errorMessage').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('errorMessage').style.display = 'none';
+                    }, 3000);
+                    return;
+                }
+            }
+            
+            currentSection += direction;
+            
+            if (currentSection < 1) currentSection = 1;
+            if (currentSection > totalSections) currentSection = totalSections;
+            
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelector(`.section[data-section="${currentSection}"]`).classList.add('active');
+            
+            document.getElementById('prevBtn').style.display = currentSection === 1 ? 'none' : 'inline-block';
+            document.getElementById('nextBtn').style.display = currentSection === totalSections ? 'none' : 'inline-block';
+            document.getElementById('submitBtn').style.display = currentSection === totalSections ? 'inline-block' : 'none';
+            
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (!Array.isArray(data[key])) {
+                        data[key] = [data[key]];
+                    }
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            data.timestamp = new Date().toISOString();
+            
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                document.getElementById('surveyForm').style.display = 'none';
+                document.getElementById('successMessage').classList.add('active');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting. Please try again.');
+            }
+        });
+        
+        // Checkbox limit for Q7 (max 3)
+        document.querySelectorAll('[name="q7_comp_better"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checked = document.querySelectorAll('[name="q7_comp_better"]:checked');
+                if (checked.length > 3) {
+                    this.checked = false;
+                    alert('Please select only top 3 factors.');
+                }
+            });
+        });
+        
+        // Checkbox limit for Q20 support (max 3)
+        document.querySelectorAll('[name="q20_support_needed"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checked = document.querySelectorAll('[name="q20_support_needed"]:checked');
+                if (checked.length > 3) {
+                    this.checked = false;
+                    alert('Please select only top 3 support needs.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
