@@ -308,22 +308,31 @@
             
             .header {
                 padding: 30px 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
             
             .header-content {
                 padding-right: 0;
                 text-align: center;
+                width: 100%;
             }
             
             .logo {
                 position: static;
-                margin: 0 auto 20px;
+                margin: 0 0 20px 0;
                 width: 80px;
                 height: 65px;
+                order: -1;
             }
             
             .header h1 {
-                font-size: 24px;
+                font-size: 22px;
+            }
+            
+            .header p {
+                font-size: 13px;
             }
             
             .rating-table {
@@ -1714,7 +1723,7 @@
         let currentSection = 1;
         const totalSections = 9;
         
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxynIhd9eC-dDWawVF6NMLbaII_EZ-4KJdrKlFpbwOcQQI1TV6kDRRJ7h6YZ8E4IdvlrA/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwPaH8vSRNOp13yekev_7_a61mrpO4ZWUXgWE8m08eUVC_CcmwEc68qsLOEhpPjfPNg/exec';
         
         function navigate(direction) {
             const currentSectionElement = document.querySelector(`.section[data-section="${currentSection}"]`);
